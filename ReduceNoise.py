@@ -13,5 +13,6 @@ reduced_noise = nr.reduce_noise(audio_clip=data, noise_clip=dataNoise, prop_decr
 
 write('c:/temp/reduced.wav', rate, reduced_noise)  # Save as WAV file 
 
+# play the WAV file
 sd.play(reduced_noise, rate)
 status = sd.wait()
