@@ -1,18 +1,26 @@
 import noisereduce as nr
-from scipy.io import wavfile
 import librosa
 import sounddevice as sd
 from scipy.io.wavfile import write
 
-# load data
+baseDir = "c:/dev/Mafat"
+# load sound file (sound + noise) data + rate 
 #rate, data = wavfile.read("c:/temp/TEST.wav")
-data, rate = librosa.load("c:/temp/Regular.wav")
-dataNoise, rate = librosa.load("c:/temp/Noise.wav")
+print("loading sound file...")
+data, rate = librosa.load(baseDir+"/sample_files/ActualSounds/s4.wav")
+# load noise only file
+print("loading noise file...")
+dataNoise, rate = librosa.load(baseDir+"/sample_files/ActualSounds/n4.wav")
 # perform noise reduction
+print("reducing noise from sound...")
 reduced_noise = nr.reduce_noise(audio_clip=data, noise_clip=dataNoise, prop_decrease=1.0, verbose=False)
+reduced_noise = nr.reduce_noise(audio_clip=reduced_noise, noise_clip=dataNoise, prop_decrease=0.75, verbose=False)
 
-write('c:/temp/reduced.wav', rate, reduced_noise)  # Save as WAV file 
+print("Writing output file...")
+# write output sound without noise
+write(baseDir+'/sample_files/ActualSounds/reduced4_twice_0.75.wav', rate, reduced_noise)  # Save as WAV file 
 
-# play the WAV file 
-sd.play(reduced_noise, rate)
-status = sd.wait()
+# print("playing output file...")
+# # play the WAV file 
+# sd.play(reduced_noise, rate)
+# status = sd.wait()
