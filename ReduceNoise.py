@@ -6,17 +6,28 @@ import numpy as np
 
 baseDir = "c:/dev/Mafat"
 
-
-
-def reduceSourceFile(sourceFile):    
+def concatNoiseFiles():
     print("loading noise file...")
     dataNoise1, rate = librosa.load(baseDir+"/sample_files/ActualSounds/n1.wav")
     dataNoise2, rate = librosa.load(baseDir+"/sample_files/ActualSounds/n2.wav")
     dataNoise3, rate = librosa.load(baseDir+"/sample_files/ActualSounds/n3.wav")
     dataNoise4, rate = librosa.load(baseDir+"/sample_files/ActualSounds/n4.wav")
     dataNoiseAll = np.concatenate((dataNoise1,dataNoise2,dataNoise3,dataNoise4))
-     
+    write(baseDir+'/sample_files/ActualSounds/n_all.wav', rate, dataNoiseAll)  # Save as WAV file 
+    
+def concatSoundFiles():
+    print("loading sound file...")
+    dataNoise1, rate = librosa.load(baseDir+"/sample_files/ActualSounds/s1.wav")
+    dataNoise2, rate = librosa.load(baseDir+"/sample_files/ActualSounds/s2.wav")
+    dataNoise3, rate = librosa.load(baseDir+"/sample_files/ActualSounds/s3.wav")
+    dataNoise4, rate = librosa.load(baseDir+"/sample_files/ActualSounds/s4.wav")
+    dataNoiseAll = np.concatenate((dataNoise1,dataNoise2,dataNoise3,dataNoise4))
+    write(baseDir+'/sample_files/ActualSounds/s_all.wav', rate, dataNoiseAll)  # Save as WAV file 
 
+
+def reduceSourceFile(sourceFile):    
+    print("loading noise file...")
+    dataNoiseAll, rate = librosa.load(baseDir+"/sample_files/ActualSounds/n_all.wav")
 
     # load sound file (sound + noise) data + rate 
     #rate, data = wavfile.read("c:/temp/TEST.wav")
@@ -31,6 +42,7 @@ def reduceSourceFile(sourceFile):
     write(baseDir+'/sample_files/ActualSounds/reduced.wav', rate, noise_reduce)  # Save as WAV file 
 
 
+#concatSoundFiles()
 reduceSourceFile(baseDir+"/sample_files/ActualSounds/s3.wav")
 # print("playing output file...")
 # # play the WAV file 
