@@ -28,12 +28,12 @@ def concatSoundFiles():
 def reduceSourceFile(sourceFile):    
     print("loading noise file...")
     dataNoiseAll, rate = librosa.load(baseDir+"/sample_files/ActualSounds/n_all.wav")
-
+    print(rate)
     # load sound file (sound + noise) data + rate 
     #rate, data = wavfile.read("c:/temp/TEST.wav")
     print("loading sound file...")
     data, rate = librosa.load(sourceFile)
-
+    print(rate)
     print("reducing noise from sound...")
     noise_reduce = nr.reduce_noise(audio_clip=data, noise_clip=dataNoiseAll, prop_decrease=1.0, verbose=False)
 
@@ -43,7 +43,7 @@ def reduceSourceFile(sourceFile):
 
 
 #concatSoundFiles()
-reduceSourceFile(baseDir+"/sample_files/ActualSounds/s3.wav")
+reduceSourceFile(baseDir+"/sample_files/ActualSounds/s2_3.wav")
 # print("playing output file...")
 # # play the WAV file 
 # sd.play(reduced_noise, rate)
