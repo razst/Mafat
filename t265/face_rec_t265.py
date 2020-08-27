@@ -2,10 +2,10 @@ import face_recognition
 import cv2
 import numpy as np
 from imutils.video import FPS
-import pyrealsense2 as rs
+#import pyrealsense2 as rs
 
 IMAGE_SHRINK_RATIO = 0.25 #how much to shrink the image frame, the more we shrink the more FPS we can process BUT the face must be closer to the camera!
-
+BASE_DIR = "C:/ISIS/workspace_ycube/Mafat/t265"
 # This is a demo of running face recognition on live video from your webcam. It's a little more complicated than the
 # other example, but it includes some basic performance tweaks to make things run a lot faster:
 #   1. Process each video frame at 1/4 resolution (though still display it at full resolution)
@@ -15,6 +15,9 @@ IMAGE_SHRINK_RATIO = 0.25 #how much to shrink the image frame, the more we shrin
 # OpenCV is *not* required to use the face_recognition library. It's only required if you want to run this
 # specific demo. If you have trouble installing it, try any of the other demos that don't require it instead.
 
+# Load a sample picture and learn how to recognize it.
+wanted_image = face_recognition.load_image_file(BASE_DIR +"/wanted.jpg")
+wanted_face_encoding = face_recognition.face_encodings(wanted_image)[0]
 
 # Configure depth and color streams
 pipeline = rs.pipeline()
@@ -26,22 +29,17 @@ pipeline.start(config)
 
 fps = FPS().start()
 
-# Load a sample picture and learn how to recognize it.
-obama_image = face_recognition.load_image_file("raz1.jpg")
-obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
 
 # Load a second sample picture and learn how to recognize it.
-biden_image = face_recognition.load_image_file("uk.jpg")
-biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
+# biden_image = face_recognition.load_image_file("uk.jpg")
+# biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
 
 # Create arrays of known face encodings and their names
 known_face_encodings = [
-    obama_face_encoding,
-    biden_face_encoding
-]
+    wanted_face_encoding]
+
 known_face_names = [
-    "Raz",
-    "NA"
+    "Wanted"
 ]
 
 # Initialize some variables
