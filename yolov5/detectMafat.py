@@ -103,23 +103,19 @@ def detect(save_img=False):
 
 
                 # Write results
+                toReturn = []
                 for *xyxy, conf, cls in reversed(det):
+                    toReturn += [names[int(cls)],(xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist(), '%.2f' % (conf)]
                     if False:  # Write to file
                         xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywhs
                         with open(txt_path + '.txt', 'a') as f:
                             f.write(('%g ' * 5 + '\n') % (cls, *xywh))  # label format
                             
-
                     if save_img or view_img:  # Add bbox to image
                         label = '%s %.2f' % (names[int(cls)], conf)
-                        print((xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()) # normalized xywhs)
                         plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=3)
+                print(toReturn)
 
-
-        
-
-            # Print time (inference + NMS)
-            #print('%sDone. (%.3fs)' % (s, t2 - t1))
 
             # Stream results
             if view_img:
@@ -151,7 +147,6 @@ def detect(save_img=False):
 
     print('Done. (%.3fs)' % (time.time() - t0))
 
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', nargs='+', type=str, default='yolov5s.pt', help='model.pt path(s)')
@@ -172,9 +167,8 @@ if __name__ == '__main__':
 
     with torch.no_grad():
         if True:  # update all models (to fix SourceChangeWarning)
-            for opt.weights in ['yolov5s.pt','gunsNduck300s.pt']:
+            for opt.weights in ['yolov5s.pt']:
                 detect()
                 strip_optimizer(opt.weights)  
         else:
             detect()
-
