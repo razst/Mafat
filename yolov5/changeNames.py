@@ -2,12 +2,12 @@ import os
   
 # Function to rename multiple files 
 def main(): 
-    i = 400  
-    directory = "C:/Users/pc/Desktop/train-mafat/images/"
-    for count, filename in enumerate(os.listdir("images")): 
+    i = 500  
+    directory = "C:/temp/train_guns/labels/"
+    for count, filename in enumerate(os.listdir(directory)): 
         dst = str(i) 
         src = filename 
-        dst = dst + ".jpg"    
+        dst = dst + ".txt"    
         os.rename(os.path.join(directory,filename), 
                   os.path.join(directory,dst))
         i += 1
