@@ -12,7 +12,9 @@ def concatNoiseFiles():
     dataNoise2, rate = librosa.load(baseDir+"/sample_files/ActualSounds/n2.wav")
     dataNoise3, rate = librosa.load(baseDir+"/sample_files/ActualSounds/n3.wav")
     dataNoise4, rate = librosa.load(baseDir+"/sample_files/ActualSounds/n4.wav")
-    dataNoiseAll = np.concatenate((dataNoise1,dataNoise2,dataNoise3,dataNoise4))
+    dataNoise5, rate = librosa.load(baseDir+"/sample_files/ActualSounds/n3_upwards.wav")
+    dataNoise6, rate = librosa.load(baseDir+"/sample_files/ActualSounds/n3_upwards2.wav")
+    dataNoiseAll = np.concatenate((dataNoise5,dataNoise6))
     write(baseDir+'/sample_files/ActualSounds/n_all.wav', rate, dataNoiseAll)  # Save as WAV file 
     
 def concatSoundFiles():
@@ -42,9 +44,8 @@ def reduceSourceFile(sourceFile):
     write(baseDir+'/sample_files/ActualSounds/reduced.wav', rate, noise_reduce)  # Save as WAV file 
 
 
-#concatSoundFiles()
-reduceSourceFile(baseDir+"/sample_files/ActualSounds/s2_3.wav")
-# print("playing output file...")
-# # play the WAV file 
-# sd.play(reduced_noise, rate)
-# status = sd.wait()
+concatNoiseFiles()
+reduceSourceFile(baseDir+"/sample_files/ActualSounds/upwards.wav")
+#print("playing output file...")
+#sd.play(reduced_noise, rate)
+#status = sd.wait()
