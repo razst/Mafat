@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 from imutils.video import FPS
 
-BASE_DIR = "C:/ISIS/workspace_ycube/Mafat/t265"
+BASE_DIR = "C:/dev/Mafat/t265"
 IMAGE_SHRINK_RATIO = 0.25 #how much to shrink the image frame, the more we shrink the more FPS we can process BUT the face must be closer to the camera!
 
 

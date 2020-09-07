@@ -1,9 +1,9 @@
 import os 
 from shutil import copyfile
 
-SOURCE_DIR = "C:/dev/raw/"
-DEST_DIR = "C:/dev/raw_dest/"
-NEW_CLASS = "0"
+SOURCE_DIR = "C:/Users/pc/Downloads/duckPicsAugmented/test/labels/"
+DEST_DIR =   "C:/Users/pc/Downloads/duckPicsAugmented/test/tmp/"
+NEW_CLASS = "2"
 
 # Function to rename multiple files 
 def main(): 
